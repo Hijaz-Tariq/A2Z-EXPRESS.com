@@ -304,3 +304,10 @@ html {
 .hover\:bg-accent:hover {
   background-color: hsl(var(--accent) / 0.9);
 }
+
+body::after {
+  content: '';
+  font-family: "Twemoji Mozilla";
+  position: absolute;
+  left: -9999px;
+}
