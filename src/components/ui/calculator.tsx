@@ -782,7 +782,7 @@
 /////////////////////////////////////////////////////////////
 
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { costCalculations } from "@/utils/calculations";
 import { CountrySelect, StateSelect } from "react-country-state-city";
@@ -808,7 +808,45 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 interface CalculatorProps {
     trigger: React.ReactNode;
 }
+interface Country {
+    id: number;
+    name: string;
+    // other properties
+}
+interface State {
+    id: number;
+    name: string;
+    // other properties
+}
 
+// function isCountry(obj: any): obj is Country {
+//     return obj && typeof obj.id === 'number' && typeof obj.name === 'string';
+// }
+
+function isCountry(obj: unknown): obj is Country {
+    return (
+        typeof obj === 'object' &&
+        obj !== null &&
+        'id' in obj &&
+        typeof (obj as { id: unknown }).id === 'number' &&
+        'name' in obj &&
+        typeof (obj as { name: unknown }).name === 'string'
+    );
+}
+// function isState(obj: any): obj is State {
+//     return obj && typeof obj.id === 'number' && typeof obj.name === 'string';
+// }
+
+function isState(obj: unknown): obj is State {
+    return (
+        typeof obj === 'object' &&
+        obj !== null &&
+        'id' in obj &&
+        typeof (obj as { id: unknown }).id === 'number' &&
+        'name' in obj &&
+        typeof (obj as { name: unknown }).name === 'string'
+    );
+}
 const Calculator = ({ trigger }: CalculatorProps) => {
     const [originCountryid, setOriginCountryid] = useState(0);
     const [originStateid, setOriginStateid] = useState(0);
@@ -827,11 +865,11 @@ const Calculator = ({ trigger }: CalculatorProps) => {
         volumetric: number;
     } | null>(null);
     const [api, setApi] = useState<CarouselApi>();
-    const [isMobile, setIsMobile] = useState(false);
+    // const [isMobile, setIsMobile] = useState(false);
 
-    useEffect(() => {
-        setIsMobile(/iPhone|iPad|iPod/i.test(navigator.userAgent));
-    }, []);
+    // useEffect(() => {
+    //     setIsMobile(/iPhone|iPad|iPod/i.test(navigator.userAgent));
+    // }, []);
 
     // const calculateShippingCost = () => {
     //     const weightValue = parseFloat(weight);
@@ -906,7 +944,7 @@ const Calculator = ({ trigger }: CalculatorProps) => {
             <DrawerTrigger asChild>{trigger}</DrawerTrigger>
             <DrawerContent className="px-4 py-6">
                 <DrawerHeader className="flex flex-col items-center px-2">
-                    <DrawerTitle className="mb-4 text-xl">
+                    <DrawerTitle className="mb-0 text-sm">
                         Shipping Calculator
                     </DrawerTitle>
                     <Carousel className="w-full max-w-xs" setApi={setApi}>
@@ -921,13 +959,24 @@ const Calculator = ({ trigger }: CalculatorProps) => {
                                                 <CardTitle className="flex flex-col md:flex-row items-center gap-2 text-base md:text-lg">
                                                     <CountrySelect
                                                         src="/products"
-                                                        onChange={(e) => setOriginCountryid(e.id)}
+                                                        onChange={(e: unknown) => {
+                                                            if (isCountry(e)) {
+                                                                setOriginCountryid(e.id);
+                                                            }
+                                                            // Handle input change case if needed
+                                                        }}
                                                         placeHolder="Select Country"
                                                     />
                                                     <StateSelect
                                                         disabled={!originCountryid}
                                                         countryid={originCountryid}
-                                                        onChange={(e) => setOriginStateid(e.id)}
+                                                        // onChange={(e) => setOriginStateid(e.id)}
+                                                        onChange={(e: unknown) => {
+                                                            if (isState(e)) {
+                                                                setOriginStateid(e.id);
+                                                            }
+                                                            // Handle input change case if needed
+                                                        }}
                                                         placeHolder="Select State"
                                                     />
                                                 </CardTitle>
@@ -956,13 +1005,25 @@ const Calculator = ({ trigger }: CalculatorProps) => {
                                                 <CardTitle className="flex flex-col md:flex-row items-center gap-2 text-base md:text-lg">
                                                     <CountrySelect
                                                         src="/products"
-                                                        onChange={(e) => setDestCountryid(e.id)}
+                                                        // onChange={(e) => setDestCountryid(e.id)}
+                                                        onChange={(e: unknown) => {
+                                                            if (isCountry(e)) {
+                                                                setDestCountryid(e.id);
+                                                            }
+                                                            // Handle input change case if needed
+                                                        }}
                                                         placeHolder="Select Country"
                                                     />
                                                     <StateSelect
                                                         disabled={!destCountryid}
                                                         countryid={destCountryid}
-                                                        onChange={(e) => setDestStateid(e.id)}
+                                                        // onChange={(e) => setDestStateid(e.id)}
+                                                        onChange={(e: unknown) => {
+                                                            if (isState(e)) {
+                                                                setDestStateid(e.id);
+                                                            }
+                                                            // Handle input change case if needed
+                                                        }}
                                                         placeHolder="Select State"
                                                     />
                                                 </CardTitle>
@@ -1139,7 +1200,7 @@ const Calculator = ({ trigger }: CalculatorProps) => {
                         </CarouselContent>
                     </Carousel>
                 </DrawerHeader>
-                <DrawerFooter className="px-2 pb-2">
+                <DrawerFooter className="px-2 pb-2 sticky bottom-1">
                     <div className="flex flex-col items-center gap-3">
                         <p className="text-primary text-xs text-center px-2">
                             **Approximate prices, excluding customs and taxes**

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { QRScanner } from './ui/scanner';
 import { Button } from '@/components/ui/button';
-import { ScanLine, SendHorizontal } from 'lucide-react';
+import { QrCode, SendHorizontal } from 'lucide-react';
 
 export function TrackingInput() {
     const [showScanner, setShowScanner] = useState(false);
@@ -48,7 +48,7 @@ export function TrackingInput() {
                     className="text-white hover:bg-primary/90"
                     aria-label="Scan tracking number"
                 >
-                    <ScanLine className="h-6 w-6" />
+                    <QrCode className="h-6 w-6" />
                 </Button>
                 <div className="relative flex-1">
                     <input
