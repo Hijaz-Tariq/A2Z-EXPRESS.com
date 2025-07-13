@@ -84,7 +84,7 @@ export function ProductGridCard({ product }: ProductGridCardProps) {
   const isOnSale = product.isOnSale &&
     (product.saleEndsAt === null || new Date(product.saleEndsAt) > new Date());
   const discountPercentage = isOnSale && product.discountPrice
-    ? Math.round(((product.price - product.discountPrice) / product.price) * 100)
+    ? Math.round(((Number(product.price) - Number(product.discountPrice)) / Number(product.price)) * 100)
     : 0;
 
   return (
@@ -126,19 +126,19 @@ export function ProductGridCard({ product }: ProductGridCardProps) {
             <div className="flex flex-col mt-1">
               <div className="flex items-baseline gap-1.5">
                 <p className="text-primary font-bold text-sm">
-                  ${product.discountPrice.toFixed(2)}
+                  ${Number(product.discountPrice).toFixed(2)}
                 </p>
                 <p className="text-gray-400 line-through text-xs">
-                  ${product.price.toFixed(2)}
+                  ${Number(product.price).toFixed(2)}
                 </p>
               </div>
               <p className="text-green-600 text-xs mt-0.5">
-                Save ${(product.price - product.discountPrice).toFixed(2)}
+                Save ${(Number(product.price) - Number(product.discountPrice)).toFixed(2)}
               </p>
             </div>
           ) : (
             <p className="text-primary font-bold text-sm mt-1">
-              ${product.price.toFixed(2)}
+              ${Number(product.price).toFixed(2)}
               <span className="text-gray-600 text-xs font-normal">/shipment</span>
             </p>
           )}

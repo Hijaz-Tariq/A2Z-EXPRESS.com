@@ -155,17 +155,17 @@ export const BestSellers = () => {
                                 <div className="flex flex-col mt-1">
                                     <div className="flex items-baseline gap-1.5">
                                         <p className="text-primary font-bold text-sm">
-                                            ${product.discountPrice.toFixed(2)}
+                                            ${Number(product.discountPrice).toFixed(2)}
                                         </p>
                                         <p className="text-gray-400 line-through text-xs">
-                                            ${product.price.toFixed(2)}
+                                            ${Number(product.price).toFixed(2)}
                                         </p>
                                     </div>
                                     <p className="text-green-600 text-xs mt-0.5">
                                         {/* Save ${(product.price - product.discountPrice).toFixed(2)} */}
                                     </p>
                                 </div>
-                                : <p className="text-primary font-bold text-base md:text-xl">${product.price.toFixed(2)}</p>
+                                : <p className="text-primary font-bold text-base md:text-xl">${Number(product.price).toFixed(2)}</p>
 
                             }
                             <Button size="sm" className="w-full mt-2 md:mt-4 text-xs md:text-base bg-primary hover:bg-primary/90">
