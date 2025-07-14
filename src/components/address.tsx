@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { CommercialDocumentUpload } from "@/components/upload-button";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent,
+    //  useState 
+    } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -57,7 +60,7 @@ const AddressSection = ({ type }: { type: "pickup" | "delivery" }) => {
             setValue(`${type}Details.address.stateId`, undefined);
         } else {
             // HTML input change case (if needed)
-            const event = e as ChangeEvent<HTMLInputElement>;
+            // const event = e as ChangeEvent<HTMLInputElement>;
             // Handle raw input changes if necessary
         }
     };
@@ -326,7 +329,7 @@ export const AddressInformationStep = ({
     const { watch, control } = useFormContext<PickupFormData>();
     const isDeliveryWarehouse =
         watch("deliveryDetails.locationType") === "warehouse";
-    const { formState } = useFormContext<PickupFormData>();
+    // const { formState } = useFormContext<PickupFormData>();
 
     // Add these checks
     const pickupCountryId = watch("pickupDetails.address.countryId");

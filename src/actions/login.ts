@@ -12,7 +12,7 @@ import {
   sendVerificationEmail,
   sendTwoFactorTokenEmail,
 } from "@/lib/mail";
-import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import { DEFAULT_LOGIN_REDIRECT } from "../../routes";
 import { 
   generateVerificationToken,
   generateTwoFactorToken 

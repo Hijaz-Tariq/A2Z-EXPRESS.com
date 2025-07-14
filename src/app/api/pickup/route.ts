@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import db from "@/lib/prisma";
@@ -181,15 +182,15 @@ export async function POST(req: Request) {
     });
 
     // Return the pickup with timeWindow converted back to object format
-    const responseData = {
-      ...pickup,
-      timeWindow: pickup.timeWindow
-        ? {
-            start: pickup.timeWindow.split("-")[0],
-            end: pickup.timeWindow.split("-")[1],
-          }
-        : null,
-    };
+    // const responseData = {
+    //   ...pickup,
+    //   timeWindow: pickup.timeWindow
+    //     ? {
+    //         start: pickup.timeWindow.split("-")[0],
+    //         end: pickup.timeWindow.split("-")[1],
+    //       }
+    //     : null,
+    // };
 
     return NextResponse.json(pickup, { status: 201 });
   } catch (error: any) {

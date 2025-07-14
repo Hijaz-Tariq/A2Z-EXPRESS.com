@@ -88,6 +88,7 @@ export const useCategories = () => {
           await response.json();
 
         // Transform special cards to match Category type
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const formattedSpecials = special.map((card: any) => ({
           ...card,
           isSpecial: true,

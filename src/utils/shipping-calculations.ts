@@ -71,7 +71,9 @@ export const calculatePackageShippingCost = (
   destCountryId: number,
   unitSystem: "metric" | "imperial" = "metric"
 ) => {
-  const { chargeableWeight, volumetricWeight } = validatePackage(
+  const { 
+    // chargeableWeight,
+     volumetricWeight } = validatePackage(
     pkg,
     unitSystem
   );

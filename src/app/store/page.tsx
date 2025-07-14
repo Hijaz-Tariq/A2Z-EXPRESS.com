@@ -265,8 +265,8 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { ProductsGrid } from './components/productsGrid';
-import { storeCategories } from '@/components/filterItems';
-import { Card } from '@/components/ui/card';
+// import { storeCategories } from '@/components/filterItems';
+// import { Card } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import EmblaCarousel from './components/EmblaCarousel';
 // import { EmblaOptionsType } from 'embla-carousel'

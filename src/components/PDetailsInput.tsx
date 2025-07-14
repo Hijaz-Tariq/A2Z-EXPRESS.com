@@ -166,7 +166,7 @@ export const PackageDetailsInput = ({
                                     sideOffset={5}
                                 >
                                     <div className="flex flex-col items-center">
-                                        <img
+                                        <Image
                                             src="/package.ico"
                                             alt="Package dimensions example"
                                             className="w-24 h-24 mb-2"
